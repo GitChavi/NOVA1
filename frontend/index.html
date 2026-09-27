@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NOVA conecta talento con oportunidades laborales.">
+  <title>NOVA | Oportunidades laborales</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body data-page="landing">
+  <div class="page-loader" id="pageLoader" aria-hidden="true">
+    <div class="loader-orbit">
+      <img src="./assets/nova-icon.png" alt="" class="loader-icon">
+      <span class="loader-dot"></span>
+    </div>
+    <div class="loader-brand">NOVA</div>
+    <span class="loader-text">Preparando tu experiencia</span>
+  </div>
+
+  <div class="page-transition" id="pageTransition" aria-hidden="true">
+    <img src="./assets/nova-icon.png" alt="" class="transition-icon">
+    <div class="transition-bar"></div>
+  </div>
+
+  <header class="navbar">
+    <a class="brand" href="./index.html" data-transition>
+      <img src="./assets/nova-icon.png" alt="NOVA" class="brand-icon">
+      <span>NOVA</span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+
+    <nav id="mainNav" class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#funciones">Cómo funciona</a>
+      <a href="#oportunidades">Oportunidades</a>
+      <a class="nav-login" href="./login.html" data-transition>Iniciar sesión</a>
+      <a class="nav-register" href="./registro.html" data-transition>Crear cuenta</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Plataforma de oportunidades laborales</span>
+        <h1>Tu próximo <span class="gradient-text">gran paso</span> empieza aquí.</h1>
+        <p>
+          NOVA reúne candidatos y empresas en un mismo espacio para descubrir talento,
+          encontrar oportunidades y hacer más claro el proceso de selección.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="./registro.html" data-transition>Crear mi cuenta</a>
+          <a class="btn btn-outline" href="#funciones">Explorar NOVA</a>
+        </div>
+
+        <div class="hero-points">
+          <span>Perfiles profesionales</span>
+          <span>Vacantes organizadas</span>
+          <span>Seguimiento de postulaciones</span>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal reveal-delay">
+        <div class="hero-logo-wrap">
+          <img src="./assets/nova-logo.png" alt="Logo de NOVA" class="hero-logo">
+
+          <div class="glass-search">
+            <div class="glass-search-icon">⌕</div>
+            <div>
+              <span>Explora oportunidades</span>
+              <strong>Diseño · Tecnología · Marketing · Cali</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-card floating-card-top">
+          <span class="status-dot"></span>
+          <div>
+            <strong>12 nuevas oportunidades</strong>
+            <small>publicadas hoy</small>
+          </div>
+        </div>
+
+        <div class="floating-card floating-card-bottom">
+          <span class="spark-mini">✦</span>
+          <div>
+            <strong>Perfil destacado</strong>
+            <small>Tu talento puede ser visto</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics" id="oportunidades">
+      <div><strong>Un perfil</strong><span>profesional para cada usuario</span></div>
+      <div><strong>Vacantes</strong><span>con requisitos claros</span></div>
+      <div><strong>Postulaciones</strong><span>fáciles de seguir</span></div>
+    </section>
+
+    <section class="section" id="funciones">
+      <div class="section-heading reveal">
+        <h2>Una experiencia pensada para conectar.</h2>
+        <p>
+          NOVA centraliza la información principal del proceso de búsqueda y selección,
+          desde el perfil profesional hasta el seguimiento de cada postulación.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <h3>Para candidatos</h3>
+          <p>Crea tu perfil, registra tus habilidades, sube tu hoja de vida y encuentra oportunidades acordes a tu experiencia.</p>
+        </article>
+
+        <article class="feature-card reveal">
+          <h3>Para empresas</h3>
+          <p>Presenta tu organización, publica vacantes, define requisitos y revisa candidatos de forma organizada.</p>
+        </article>
+
+        <article class="feature-card reveal">
+          <h3>Seguimiento</h3>
+          <p>Consulta y gestiona el estado de las postulaciones para mantener el proceso claro para ambas partes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-section reveal">
+      <div>
+        <span class="eyebrow light">Da el siguiente paso</span>
+        <h2>Tu talento también merece un lugar.</h2>
+        <p>Únete a NOVA y empieza a descubrir nuevas oportunidades.</p>
+      </div>
+      <a class="btn btn-light" href="./registro.html" data-transition>Comenzar ahora</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="./assets/nova-icon.png" alt="NOVA" class="footer-icon">
+      <span>NOVA</span>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>
