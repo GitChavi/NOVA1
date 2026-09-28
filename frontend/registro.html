@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear cuenta | NOVA</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="auth-page" data-page="register">
+  <div class="page-loader" id="pageLoader" aria-hidden="true">
+    <div class="loader-orbit"><img src="./assets/nova-icon.png" alt="" class="loader-icon"><span class="loader-dot"></span></div>
+    <div class="loader-brand">NOVA</div><span class="loader-text">Preparando tu experiencia</span>
+  </div>
+
+  <div class="page-transition" id="pageTransition" aria-hidden="true"><img src="./assets/nova-icon.png" alt="" class="transition-icon"></div>
+
+  <header class="navbar compact">
+    <a class="brand" href="./index.html" data-transition><img src="./assets/nova-icon.png" alt="NOVA" class="brand-icon"><span>NOVA</span></a>
+    <a class="back-link" href="./index.html" data-transition>Volver al inicio</a>
+  </header>
+
+  <main class="auth-wrapper">
+    <section class="auth-side reveal">
+      <span class="eyebrow">Empieza en NOVA</span>
+      <h1>Crea un perfil que haga que te <span class="gradient-text">encuentren.</span></h1>
+      <p>Elige cómo vas a usar NOVA y completa tus datos. Más adelante podrás ampliar tu perfil desde tu panel.</p>
+      <ul class="benefit-list">
+        <li><span>—</span> Perfil profesional</li>
+        <li><span>—</span> Habilidades y experiencia</li>
+        <li><span>—</span> Oportunidades relevantes</li>
+      </ul>
+    </section>
+
+    <section class="auth-card auth-card-wide reveal reveal-delay">
+      <div class="auth-header">
+        <span class="eyebrow">Registro</span>
+        <h2>Crear cuenta</h2>
+        <p>Selecciona el tipo de usuario y completa tus datos.</p>
+      </div>
+
+      <div class="role-switch" role="group" aria-label="Tipo de usuario">
+        <button class="role-option active" type="button" data-role="candidato">Soy candidato</button>
+        <button class="role-option" type="button" data-role="empresa">Soy empresa</button>
+      </div>
+
+      <form class="auth-form" id="registerForm">
+        <input type="hidden" id="role" name="role" value="candidato">
+
+        <label for="name">Nombre</label>
+        <input id="name" name="name" type="text" placeholder="Tu nombre completo" autocomplete="name" required>
+
+        <label for="registerEmail">Correo electrónico</label>
+        <input id="registerEmail" name="email" type="email" placeholder="nombre@correo.com" autocomplete="email" required>
+
+        <label for="registerPassword">Contraseña</label>
+        <input id="registerPassword" name="password" type="password" placeholder="Crea una contraseña segura" minlength="6" autocomplete="new-password" required aria-describedby="pwRequirements">
+
+        <ul class="pw-requirements" id="pwRequirements">
+          <li data-rule="length">Mínimo 6 caracteres</li>
+          <li data-rule="upper">Una letra mayúscula</li>
+          <li data-rule="number">Un número</li>
+        </ul>
+
+        <button class="btn btn-primary btn-full" type="submit">Crear cuenta</button>
+        <p id="registerMessage" class="form-message" aria-live="polite"></p>
+      </form>
+
+      <div class="auth-footer"><p>¿Ya tienes una cuenta?</p><a href="./login.html" data-transition>Iniciar sesión</a></div>
+    </section>
+  </main>
+
+  <div class="success-overlay" id="registerOverlay" aria-hidden="true">
+    <div class="success-card">
+      <div class="success-icon"><img src="./assets/nova-icon.png" alt="NOVA"></div>
+      <h3>Cuenta lista</h3>
+      <p>Tu siguiente paso será iniciar sesión en NOVA.</p>
+      <div class="success-bar"><span></span></div>
+    </div>
+  </div>
+
+  <script src="./js/main.js"></script>
+  <script>
+    (function () {
+      var passwordInput = document.getElementById('registerPassword');
+      var rules = {
+        length: function (v) { return v.length >= 6; },
+        upper: function (v) { return /[A-Z]/.test(v); },
+        number: function (v) { return /[0-9]/.test(v); }
+      };
+
+      if (passwordInput) {
+        passwordInput.addEventListener('input', function () {
+          var value = passwordInput.value;
+          var allMet = true;
+
+          Object.keys(rules).forEach(function (rule) {
+            var item = document.querySelector('[data-rule="' + rule + '"]');
+            var met = rules[rule](value);
+            if (item) item.classList.toggle('met', met);
+            if (!met) allMet = false;
+          });
+
+          passwordInput.classList.toggle('is-valid', allMet && value.length > 0);
+          passwordInput.classList.toggle('is-invalid', !allMet && value.length > 0);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
