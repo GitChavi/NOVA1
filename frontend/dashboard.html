@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi espacio | NOVA</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="dashboard-page" data-page="dashboard">
+
+  <div class="page-loader" id="pageLoader" aria-hidden="true">
+    <div class="loader-orbit"><img src="./assets/nova-icon.png" alt="" class="loader-icon"><span class="loader-dot"></span></div>
+    <div class="loader-brand">NOVA</div>
+    <span class="loader-text">Entrando a tu espacio</span>
+  </div>
+
+  <div class="dash-shell">
+
+    <aside class="dash-sidebar">
+      <a class="brand" href="./index.html" data-transition>
+        <img src="./assets/nova-icon.png" alt="NOVA" class="brand-icon">
+        <span>NOVA</span>
+      </a>
+
+      <nav class="dash-nav">
+        <a href="#" class="active"><span class="dash-nav-icon">⌂</span> Resumen</a>
+        <a href="#"><span class="dash-nav-icon">◱</span> Vacantes</a>
+        <a href="#"><span class="dash-nav-icon">✎</span> Postulaciones</a>
+        <a href="#"><span class="dash-nav-icon">☆</span> Guardadas</a>
+        <a href="#"><span class="dash-nav-icon">⚙</span> Configuración</a>
+      </nav>
+
+      <div class="dash-sidebar-bottom">
+        <a class="dash-logout" href="./index.html" data-transition><span class="dash-nav-icon">⏻</span> Cerrar sesión</a>
+
+        <div class="dash-promo">
+          <span class="dash-promo-icon">✦</span>
+          <strong>Completa tu perfil para recibir mejores oportunidades</strong>
+          <a class="btn btn-primary btn-full" href="#">Completar perfil</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="dash-main">
+      <div class="dash-searchbar">
+        <span class="dash-search-icon">⌕</span>
+        <input type="text" placeholder="Buscar vacantes, empresas o habilidades">
+      </div>
+
+      <div class="dash-categories">
+        <span class="dash-chip chip-yellow"><span class="dash-chip-dot"></span> Tecnología</span>
+        <span class="dash-chip chip-coral"><span class="dash-chip-dot"></span> Diseño</span>
+        <span class="dash-chip chip-sky"><span class="dash-chip-dot"></span> Marketing</span>
+        <span class="dash-chip chip-mint"><span class="dash-chip-dot"></span> Contabilidad</span>
+        <span class="dash-chip">Ver todas</span>
+      </div>
+
+      <div class="dash-section-row">
+        <h2>Búsquedas recientes</h2>
+        <a href="#">Ver todas</a>
+      </div>
+      <div class="dash-cards">
+        <article class="job-card">
+          <div class="job-card-banner bg-yellow"><span class="job-card-tag">Nuevo</span></div>
+          <div class="job-card-body">
+            <h3>Diseñador/a UX/UI</h3>
+            <div class="job-card-meta"><span>Remoto · Cali</span><strong>$3.2M</strong></div>
+          </div>
+        </article>
+
+        <article class="job-card">
+          <div class="job-card-banner bg-sky"><span class="job-card-tag">Destacada</span></div>
+          <div class="job-card-body">
+            <h3>Desarrollador/a Backend</h3>
+            <div class="job-card-meta"><span>Híbrido · Cali</span><strong>$4.5M</strong></div>
+          </div>
+        </article>
+
+        <article class="job-card">
+          <div class="job-card-banner bg-coral"><span class="job-card-tag">Nuevo</span></div>
+          <div class="job-card-body">
+            <h3>Analista de Marketing</h3>
+            <div class="job-card-meta"><span>Presencial · Cali</span><strong>$2.8M</strong></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="dash-section-row">
+        <h2>Vacantes populares</h2>
+        <a href="#">Ver todas</a>
+      </div>
+      <div class="dash-cards">
+        <article class="job-card">
+          <div class="job-card-banner bg-mint"><span class="job-card-tag">42 postulantes</span></div>
+          <div class="job-card-body">
+            <h3>Contador/a Senior</h3>
+            <div class="job-card-meta"><span>Remoto</span><strong>$3.6M</strong></div>
+          </div>
+        </article>
+
+        <article class="job-card">
+          <div class="job-card-banner bg-yellow"><span class="job-card-tag">28 postulantes</span></div>
+          <div class="job-card-body">
+            <h3>Product Manager</h3>
+            <div class="job-card-meta"><span>Híbrido · Cali</span><strong>$5.1M</strong></div>
+          </div>
+        </article>
+
+        <article class="job-card">
+          <div class="job-card-banner bg-sky"><span class="job-card-tag">17 postulantes</span></div>
+          <div class="job-card-body">
+            <h3>Ilustrador/a Digital</h3>
+            <div class="job-card-meta"><span>Remoto</span><strong>$2.5M</strong></div>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <aside class="dash-right">
+      <div class="dash-profile">
+        <div class="dash-avatar" id="userInitial">U</div>
+        <div>
+          <strong id="userName">Usuario</strong>
+          <span>Vas muy bien, sigue así</span>
+        </div>
+      </div>
+
+      <h2>Postulación destacada</h2>
+      <div class="spotlight-card">
+        <span class="spotlight-tag">En revisión</span>
+        <h3>Diseñador/a UX/UI en Estudio Norte</h3>
+        <p>Postulaste hace 3 días · próxima entrevista pendiente de confirmar</p>
+      </div>
+
+      <h2>Mis postulaciones</h2>
+      <div class="application-list">
+        <div class="application-item">
+          <div class="application-avatar bg-yellow">EN</div>
+          <div class="application-info">
+            <strong>Estudio Norte</strong>
+            <span>Entrevista agendada</span>
+            <div class="application-progress"><span style="width:75%"></span></div>
+          </div>
+        </div>
+
+        <div class="application-item">
+          <div class="application-avatar bg-coral">BP</div>
+          <div class="application-info">
+            <strong>Banco Pacífico</strong>
+            <span>En revisión</span>
+            <div class="application-progress"><span style="width:45%"></span></div>
+          </div>
+        </div>
+
+        <div class="application-item">
+          <div class="application-avatar bg-sky">DC</div>
+          <div class="application-info">
+            <strong>Data Cali</strong>
+            <span>Postulación enviada</span>
+            <div class="application-progress"><span style="width:20%"></span></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>
