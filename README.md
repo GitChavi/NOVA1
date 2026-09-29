@@ -1,131 +1,54 @@
 # NOVA — Avance 1
 
-## ¿Qué es NOVA?
+## Problema y objetivo
 
-NOVA es una plataforma web de oportunidades laborales que busca conectar a candidatos y empresas en un mismo espacio.
+NOVA propone un espacio web para conectar candidatos que buscan empleo con empresas que publican oportunidades. El objetivo de este avance es presentar la interfaz inicial y la base técnica del proyecto.
 
-La idea es facilitar el proceso de búsqueda y publicación de empleo, permitiendo que los candidatos puedan crear su perfil, mostrar sus habilidades, consultar vacantes y realizar postulaciones. Por otro lado, las empresas podrán presentar su información, publicar ofertas laborales y gestionar los candidatos interesados.
+## Alcance de este avance
 
-En este primer avance se construye la base visual y técnica del proyecto, sobre la cual se desarrollarán las funciones completas en los siguientes avances.
+- Landing page y vistas maquetadas de inicio de sesión y registro.
+- Selección del tipo de cuenta: candidato o empresa.
+- Diseño adaptable a pantallas de escritorio y móviles.
+- Esquema relacional inicial para usuarios, perfiles, habilidades, vacantes, postulaciones y archivos.
+- Backend con Node.js y Express, conexión a PostgreSQL y endpoint `GET /health`.
 
----
+Los formularios de inicio de sesión y registro validan los campos en el navegador; no crean cuentas ni autentican usuarios contra el backend en este avance.
 
-## Objetivo del proyecto
+## Arquitectura
 
-Desarrollar una aplicación web que permita conectar candidatos y empresas mediante la creación de perfiles, publicación de vacantes, búsqueda de oportunidades y gestión de postulaciones.
+El proyecto separa la interfaz estática en `frontend/` y el servidor/API en `backend/`. El endpoint `/health` ejecuta una consulta sencilla a PostgreSQL y devuelve el estado de la conexión.
 
----
-
-## ¿Qué incluye el Avance 1?
-
-En esta etapa se trabajó principalmente en la estructura inicial del proyecto y en la interfaz de la plataforma.
-
-### Parte visual
-
-- Landing Page de NOVA.
-- Vista de inicio de sesión.
-- Vista de registro.
-- Selección del tipo de usuario: candidato o empresa.
-- Dashboard inicial del usuario.
-- Diseño responsive para computador, tablet y celular.
-- Logo e icono propios de NOVA.
-- Tipografía Agerlas para la identidad visual.
-- Paleta de colores basada en navy, azul, púrpura, lavanda, rosa, naranja y crema.
-- Efectos de glassmorphism.
-- Degradados y elementos visuales.
-- Transiciones entre páginas.
-- Animaciones de entrada y aparición de elementos.
-
-### Parte técnica
-
-- Separación entre frontend y backend.
-- Backend construido con Node.js y Express.
-- Conexión inicial con PostgreSQL.
-- Endpoint `/health` para comprobar el estado del servidor y la conexión con la base de datos.
-- Estructura inicial de las tablas de la plataforma.
-
----
-
-## Estructura del proyecto
+## Estructura
 
 ```text
 NOVA/
-│
+├── Diagrama ER/
+│   └── Empresa y Candidato-2026-09-28-183524.png
 ├── frontend/
 │   ├── index.html
 │   ├── login.html
 │   ├── registro.html
 │   ├── dashboard.html
-│   │
-│   ├── css/
-│   │   └── styles.css
-│   │
-│   ├── js/
-│   │   └── main.js
-│   │
+│   ├── css/styles.css
+│   ├── js/main.js
 │   └── assets/
-│       ├── nova-logo.png
-│       ├── nova-icon.png
-│       └── fonts/
-│           └── Agerlas-DEMO.ttf
-│
 ├── backend/
 │   ├── src/
 │   │   ├── app.js
 │   │   ├── db.js
-│   │   ├── middleware/
-│   │   │   └── auth.middleware.js
-│   │   ├── routes/
-│   │   │   ├── health.routes.js
-│   │   │   ├── auth.routes.js
-│   │   │   ├── vacantes.routes.js
-│   │   │   ├── postulaciones.routes.js
-│   │   │   └── archivos.routes.js
-│   │   └── controllers/
-│   │       ├── auth.controller.js
-│   │       ├── vacantes.controller.js
-│   │       ├── postulaciones.controller.js
-│   │       └── archivos.controller.js
-│   │
+│   │   └── routes/health.routes.js
 │   ├── sql/
 │   │   ├── 01_create_database.sql
 │   │   └── 02_schema.sql
-│   │
-│   ├── uploads/            # archivos subidos por los usuarios (no se versiona)
 │   ├── package.json
 │   ├── .env.example
 │   └── .gitignore
-│
-├── .gitignore
 └── README.md
 ```
 
----
+## Ejecución básica
 
-## Avance 2 — API REST implementada
-
-Sobre la base del Avance 1 se construyó el backend funcional completo:
-
-### Autenticación (`/api/auth`)
-- `POST /registro` — crea usuario + perfil (candidato o empresa) y devuelve un token JWT.
-- `POST /login` — valida credenciales contra la base de datos y devuelve un token JWT.
-- `POST /logout` — cierre de sesión (stateless: el cliente descarta el token).
-
-### Vacantes (`/api/vacantes`)
-- `GET /` y `GET /:id` — públicas, con filtros por `categoria`, `ubicacion`, `modalidad`.
-- `POST /`, `PUT /:id`, `DELETE /:id` — privadas, solo para usuarios `tipo=empresa` dueños de la vacante.
-- `GET /:id/postulantes` — privada, solo la empresa dueña.
-
-### Postulaciones (`/api/postulaciones`)
-- `POST /` — un candidato se postula a una vacante.
-- `GET /mias` — el candidato ve sus propias postulaciones.
-- `PUT /:id/estado` — la empresa actualiza el estado de una postulación.
-
-### Archivos (`/api/archivos`) — persistencia dual
-- `POST /subir` — sube un archivo físico a `backend/uploads/` (multipart/form-data, campo `archivo`) y registra sus metadatos en la tabla `archivos`.
-- `GET /mios` — lista los archivos del usuario autenticado.
-
-Todas las rutas privadas requieren el header `Authorization: Bearer <token>` obtenido en el login/registro.
-
-### Frontend conectado
-`frontend/js/main.js` ya no simula el login con `localStorage`: hace `fetch` real contra `/api/auth/login` y `/api/auth/registro`, guarda el token JWT recibido, y `dashboard.html` redirige a `login.html` si no hay una sesión válida.
+1. Crear `backend/.env` a partir de `backend/.env.example` y configurar las credenciales de PostgreSQL.
+2. Crear la base de datos y ejecutar el esquema SQL.
+3. Desde la carpeta `backend/`, ejecutar `npm install` y luego `npm start`.
+4. Consultar `http://localhost:3000/health`. Una respuesta `{"status":"ok","database":"connected"}` confirma la conexión.

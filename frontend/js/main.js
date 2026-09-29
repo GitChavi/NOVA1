@@ -1,4 +1,4 @@
-﻿const transition = document.getElementById('pageTransition');
+const transition = document.getElementById('pageTransition');
 const loader = document.getElementById('pageLoader');
 window.addEventListener('load', () => { if (loader) window.setTimeout(() => loader.classList.add('is-hidden'), 500); });
 
@@ -44,7 +44,7 @@ loginForm?.addEventListener('submit', (event) => {
   const email = loginForm.elements.email.value.trim();
   const password = loginForm.elements.password.value;
   if (!emailPattern.test(email) || password.length < 6) return showMessage(loginForm, 'Revisa el correo y la contraseña.');
-  showMessage(loginForm, 'Datos válidos. El acceso se conectará al backend en un siguiente avance.', true);
+  showMessage(loginForm, 'Datos válidos. El acceso todavía no está conectado al backend.', true);
 });
 
 const registerForm = document.getElementById('registerForm');
@@ -56,7 +56,7 @@ registerForm?.addEventListener('submit', (event) => {
   const password = registerForm.elements.password.value;
   if (name.length < 2 || !emailPattern.test(email) || !passwordValid(password)) return showMessage(registerForm, 'Revisa tus datos y los requisitos de contraseña.');
   const role = roleInput?.value === 'empresa' ? 'empresa' : 'candidato';
-  showMessage(registerForm, `Datos válidos para el registro de ${role}. La conexión al backend se realizará en un siguiente avance.`, true);
+  showMessage(registerForm, `Datos válidos para el registro de ${role}. La autenticación todavía no está conectada al backend.`, true);
 });
 
 const userName = document.getElementById('userName');
