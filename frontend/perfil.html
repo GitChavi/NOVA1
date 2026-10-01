@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi perfil | NOVA</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="dashboard-page" data-page="perfil">
+
+  <div class="page-loader" id="pageLoader" aria-hidden="true">
+    <div class="loader-orbit"><img src="./assets/nova-icon.png" alt="" class="loader-icon"><span class="loader-dot"></span></div>
+    <div class="loader-brand">NOVA</div>
+    <span class="loader-text">Cargando tu perfil...</span>
+  </div>
+
+  <div class="dash-shell">
+
+    <aside class="dash-sidebar">
+      <a class="brand" href="./index.html" data-transition>
+        <img src="./assets/nova-icon.png" alt="NOVA" class="brand-icon">
+        <span>NOVA</span>
+      </a>
+
+      <nav class="dash-nav">
+        <a href="./dashboard.html" data-transition><span class="dash-nav-icon">⌂</span> Resumen</a>
+        <a href="#"><span class="dash-nav-icon">◱</span> Vacantes</a>
+        <a href="#"><span class="dash-nav-icon">✎</span> Postulaciones</a>
+        <a href="#"><span class="dash-nav-icon">☆</span> Guardadas</a>
+        <a href="./perfil.html" class="active"><span class="dash-nav-icon">𖨆</span> Mi perfil</a>
+        <a href="#"><span class="dash-nav-icon">⚙</span> Configuración</a>
+      </nav>
+
+      <div class="dash-sidebar-bottom">
+        <a class="dash-logout" href="./index.html" data-transition><span class="dash-nav-icon">⏻</span> Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="dash-main">
+      <div class="dash-section-row">
+        <div>
+          <span class="eyebrow">Información personal</span>
+          <h2>Editar perfil profesional</h2>
+        </div>
+      </div>
+
+      <section class="auth-card auth-card-wide">
+        <div class="auth-header">
+          <span class="eyebrow">Perfil</span>
+          <h2>Datos del candidato</h2>
+          <p>Completa y actualiza tu información para que las empresas conozcan tu experiencia.</p>
+        </div>
+
+        <form class="auth-form" id="profileForm">
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" name="nombre" type="text" placeholder="Tu nombre completo" required>
+
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" placeholder="nombre@correo.com" required>
+
+          <label for="telefono">Teléfono de contacto</label>
+          <input id="telefono" name="telefono" type="tel" placeholder="+57 300 000 0000">
+
+          <label for="titulo_profesional">Título profesional</label>
+          <input id="titulo_profesional" name="titulo_profesional" type="text" placeholder="Ej: Desarrollador/a Frontend">
+
+          <label for="ubicacion">Ubicación</label>
+          <input id="ubicacion" name="ubicacion" type="text" placeholder="Ej: Cali, Colombia">
+
+          <label for="resumen">Resumen profesional / Biografía</label>
+          <textarea id="resumen" name="resumen" rows="4" placeholder="Cuéntale a las empresas sobre tu trayectoria, habilidades e intereses profesionales..."></textarea>
+
+          <button class="btn btn-primary btn-full" type="submit">Guardar perfil</button>
+          <p id="profileMessage" class="form-message" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <aside class="dash-right">
+      <div class="dash-profile">
+        <div class="dash-avatar" id="previewInitial">U</div>
+        <div>
+          <strong id="previewName">Tu Nombre</strong>
+          <span id="previewTitle">Tu Título</span>
+        </div>
+      </div>
+
+      <h2>Vista previa del perfil</h2>
+      <div class="spotlight-card">
+        <span class="spotlight-tag" id="previewLocation">Ubicación no definida</span>
+        <h3 id="previewHeader">Perfil Profesional</h3>
+        <p id="previewSummary">Tu resumen profesional aparecerá aquí...</p>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="./js/main.js"></script>
+  <script>
+    (function () {
+      var nameInput = document.getElementById('nombre');
+      var titleInput = document.getElementById('titulo_profesional');
+      var locationInput = document.getElementById('ubicacion');
+      var summaryInput = document.getElementById('resumen');
+
+      var prevName = document.getElementById('previewName');
+      var prevInitial = document.getElementById('previewInitial');
+      var prevTitle = document.getElementById('previewTitle');
+      var prevLocation = document.getElementById('previewLocation');
+      var prevSummary = document.getElementById('previewSummary');
+
+      function updatePreview() {
+        var nameVal = nameInput.value.trim() || 'Tu Nombre';
+        prevName.textContent = nameVal;
+        prevInitial.textContent = nameVal.charAt(0).toUpperCase();
+        prevTitle.textContent = titleInput.value.trim() || 'Tu Título';
+        prevLocation.textContent = locationInput.value.trim() || 'Ubicación no definida';
+        prevSummary.textContent = summaryInput.value.trim() || 'Tu resumen profesional aparecerá aquí...';
+      }
+
+      [nameInput, titleInput, locationInput, summaryInput].forEach(function (input) {
+        if (input) input.addEventListener('input', updatePreview);
+      });
+    })();
+  </script>
+</body>
+</html>
