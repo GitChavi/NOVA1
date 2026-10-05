@@ -1,2 +1,6 @@
 node_modules/
 .env
+<<<<<<< Updated upstream
+=======
+backend/uploads/
+>>>>>>> Stashed changes
