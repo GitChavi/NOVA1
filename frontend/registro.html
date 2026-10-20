@@ -61,6 +61,11 @@
           <li data-rule="number">Un número</li>
         </ul>
 
+        <label class="check-row consent" for="consent">
+          <input id="consent" name="consent" type="checkbox" required>
+          <span>Acepto la <a href="#" id="openPolicy" class="text-link">política de tratamiento de datos personales</a> de NOVA.</span>
+        </label>
+
         <button class="btn btn-primary btn-full" type="submit">Crear cuenta</button>
         <p id="registerMessage" class="form-message" aria-live="polite"></p>
       </form>
@@ -77,6 +82,19 @@
       <div class="success-bar"><span></span></div>
     </div>
   </div>
+
+  <dialog class="policy-dialog" id="policyDialog" aria-labelledby="policyTitle">
+    <div class="policy-head"><h3 id="policyTitle">Política de tratamiento de datos personales</h3><button class="policy-close" type="button" data-close aria-label="Cerrar">&times;</button></div>
+    <div class="policy-body">
+      <p>En cumplimiento de la Ley 1581 de 2012 y sus normas reglamentarias, NOVA te explica cómo trata tus datos personales.</p>
+      <h4>Responsable</h4><p>NOVA. Contacto para consultas y reclamos: privacidad@nova.co</p>
+      <h4>Datos que recolectamos</h4><p>Nombre, correo electrónico, tipo de usuario (candidato o empresa) y la información de perfil, hoja de vida y postulaciones que decidas registrar.</p>
+      <h4>Para qué los usamos</h4><p>Crear y administrar tu cuenta, conectar candidatos con empresas, mostrar tu perfil y tus postulaciones a quienes corresponda y enviarte comunicaciones sobre el servicio.</p>
+      <h4>Tus derechos</h4><p>Puedes conocer, actualizar y rectificar tus datos, pedir prueba de tu autorización, saber cómo se usan, revocar la autorización o solicitar la supresión, y presentar quejas ante la Superintendencia de Industria y Comercio.</p>
+      <h4>Vigencia</h4><p>Conservamos tus datos mientras tengas una cuenta activa o mientras la ley lo exija.</p>
+    </div>
+    <div class="policy-foot"><button class="btn btn-outline" type="button" data-close>Cerrar</button><button class="btn btn-primary" type="button" id="acceptPolicy">Aceptar política</button></div>
+  </dialog>
 
   <script src="./js/main.js"></script>
   <script>

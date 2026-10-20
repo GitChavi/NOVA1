@@ -27,7 +27,7 @@
       <img src="./assets/nova-icon.png" alt="NOVA" class="brand-icon">
       <span>NOVA</span>
     </a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 
     <nav id="mainNav" class="nav-links">
       <a href="#inicio">Inicio</a>
@@ -41,53 +41,20 @@
   <main>
     <section class="hero" id="inicio">
       <div class="hero-copy reveal">
-        <span class="eyebrow">Plataforma de oportunidades laborales</span>
-        <h1>Tu próximo <span class="gradient-text">gran paso</span> empieza aquí.</h1>
-        <p>
-          NOVA reúne candidatos y empresas en un mismo espacio para descubrir talento,
-          encontrar oportunidades y hacer más claro el proceso de selección.
-        </p>
+        <h1>Tu próximo trabajo está a una postulación.</h1>
+        <p>Crea tu perfil, mira vacantes con requisitos claros y sigue cada postulación en un solo lugar. Si eres empresa, publica y revisa candidatos sin hojas de cálculo.</p>
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="./registro.html" data-transition>Crear mi cuenta</a>
           <a class="btn btn-outline" href="#funciones">Explorar NOVA</a>
         </div>
-
-        <div class="hero-points">
-          <span>Perfiles profesionales</span>
-          <span>Vacantes organizadas</span>
-          <span>Seguimiento de postulaciones</span>
-        </div>
       </div>
 
-      <div class="hero-visual reveal reveal-delay">
-        <div class="hero-logo-wrap">
-          <img src="./assets/NOVA-LOGO.png" alt="Logo de NOVA" class="hero-logo">
-
-          <div class="glass-search">
-            <div class="glass-search-icon">⌕</div>
-            <div>
-              <span>Explora oportunidades</span>
-              <strong>Diseño · Tecnología · Marketing · Cali</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="floating-card floating-card-top">
-          <span class="status-dot"></span>
-          <div>
-            <strong>12 nuevas oportunidades</strong>
-            <small>publicadas hoy</small>
-          </div>
-        </div>
-
-        <div class="floating-card floating-card-bottom">
-          <span class="spark-mini">✦</span>
-          <div>
-            <strong>Perfil destacado</strong>
-            <small>Tu talento puede ser visto</small>
-          </div>
-        </div>
+      <div class="hero-visual" aria-label="Ejemplos de vacantes">
+        <i class="ring"></i><i class="star s1"></i><i class="star s2"></i>
+        <article class="vac vac-1"><div class="vac-top"><span class="vac-logo">EN</span><span class="vac-tag">Nuevo</span></div><h3>Diseñador/a UX/UI</h3><p>Remoto, Cali</p><div class="vac-match"><span style="--w:92%"></span></div><div class="vac-foot"><small>92% compatible</small><strong>$3.2M</strong></div></article>
+        <article class="vac vac-2"><div class="vac-top"><span class="vac-logo">BP</span><span class="vac-tag">Destacada</span></div><h3>Desarrollador/a Backend</h3><p>Híbrido, Cali</p><div class="vac-match"><span style="--w:87%"></span></div><div class="vac-foot"><small>87% compatible</small><strong>$4.5M</strong></div></article>
+        <article class="vac vac-3"><div class="vac-top"><span class="vac-logo">DC</span><span class="vac-tag">Nuevo</span></div><h3>Analista de Marketing</h3><p>Presencial, Cali</p><div class="vac-match"><span style="--w:81%"></span></div><div class="vac-foot"><small>81% compatible</small><strong>$2.8M</strong></div></article>
       </div>
     </section>
 
@@ -99,36 +66,45 @@
 
     <section class="section" id="funciones">
       <div class="section-heading reveal">
-        <h2>Una experiencia pensada para conectar.</h2>
-        <p>
-          NOVA centraliza la información principal del proceso de búsqueda y selección,
-          desde el perfil profesional hasta el seguimiento de cada postulación.
-        </p>
+        <h2>Candidatos y empresas, en el mismo lugar.</h2>
+        <p>Perfil, vacantes y seguimiento de postulaciones en un solo lugar.</p>
       </div>
 
       <div class="feature-grid">
         <article class="feature-card reveal">
+          <div class="mock mock-profile" aria-hidden="true"><div class="mp-head"><i class="av"></i><div><b></b><b class="s"></b></div></div><div class="mp-chips"><span>Figma</span><span>React</span><span>Inglés B2</span></div></div>
           <h3>Para candidatos</h3>
           <p>Crea tu perfil, registra tus habilidades, sube tu hoja de vida y encuentra oportunidades acordes a tu experiencia.</p>
         </article>
 
         <article class="feature-card reveal">
+          <div class="mock mock-team" aria-hidden="true"><i class="av a1"></i><i class="av a2"></i><i class="av a3"></i><i class="av a4"></i><span>+24 candidatos</span></div>
           <h3>Para empresas</h3>
           <p>Presenta tu organización, publica vacantes, define requisitos y revisa candidatos de forma organizada.</p>
         </article>
 
         <article class="feature-card reveal">
+          <div class="mock mock-track" aria-hidden="true"><div><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><small>Entrevista agendada</small></div>
           <h3>Seguimiento</h3>
           <p>Consulta y gestiona el estado de las postulaciones para mantener el proceso claro para ambas partes.</p>
         </article>
       </div>
     </section>
 
+    <section class="section steps" id="proceso">
+      <i class="star s1" aria-hidden="true"></i>
+      <div class="section-heading reveal"><h2>Así de simple.</h2><p>Cuatro pasos entre tu perfil y tu primera entrevista.</p></div>
+      <ol class="step-list">
+        <li class="reveal"><span class="step-num">1</span><h3>Crea tu perfil</h3><p>Cuenta quién eres, tus habilidades y sube tu hoja de vida.</p></li>
+        <li class="reveal"><span class="step-num">2</span><h3>Encuentra vacantes</h3><p>Filtra por área, modalidad y salario, con requisitos claros.</p></li>
+        <li class="reveal"><span class="step-num">3</span><h3>Postúlate</h3><p>Tu perfil llega a la empresa con un solo clic.</p></li>
+        <li class="reveal"><span class="step-num">4</span><h3>Sigue el proceso</h3><p>Mira en qué estado va cada postulación.</p></li>
+      </ol>
+    </section>
+
     <section class="cta-section reveal">
       <div>
-        <span class="eyebrow light">Da el siguiente paso</span>
-        <h2>Tu talento también merece un lugar.</h2>
-        <p>Únete a NOVA y empieza a descubrir nuevas oportunidades.</p>
+        <h2>Crea tu cuenta en dos minutos.</h2>
       </div>
       <a class="btn btn-light" href="./registro.html" data-transition>Comenzar ahora</a>
     </section>
