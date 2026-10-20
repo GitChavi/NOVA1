@@ -1,11 +1,37 @@
 const transition = document.getElementById('pageTransition');
 const loader = document.getElementById('pageLoader');
 const seen = sessionStorage.getItem('novaSeen');
-if (loader && seen) { loader.style.transition = 'none'; loader.classList.add('is-hidden'); }
-window.addEventListener('load', () => {
-  sessionStorage.setItem('novaSeen', '1');
-  if (loader && !seen) window.setTimeout(() => loader.classList.add('is-hidden'), 600);
-});
+const rootEl = document.documentElement;
+if (loader && seen) { loader.style.display = 'none'; rootEl.classList.remove('is-loading'); }
+else if (loader) {
+  // Intro de marca: progreso real + mínimo de 1.7s; luego la cortina sube y el contenido entra
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MIN = reduce ? 250 : 1700;
+  const bar = loader.querySelector('.loader-progress span');
+  const count = document.getElementById('loaderCount');
+  const t0 = performance.now();
+  let loaded = document.readyState === 'complete';
+  let finished = false;
+  window.addEventListener('load', () => { loaded = true; });
+  const finish = () => {
+    if (finished) return; finished = true;
+    sessionStorage.setItem('novaSeen', '1');
+    loader.classList.add('is-exiting');
+    window.setTimeout(() => rootEl.classList.remove('is-loading'), reduce ? 0 : 260);
+    window.setTimeout(() => loader.classList.add('is-hidden'), reduce ? 50 : 1000);
+  };
+  const tick = (now) => {
+    const t = Math.min((now - t0) / MIN, 1);
+    let p = 1 - Math.pow(1 - t, 3);
+    if (!loaded) p = Math.min(p, 0.92);
+    bar?.style.setProperty('--p', p.toFixed(3));
+    if (count) count.textContent = Math.round(p * 100);
+    if (t >= 1 && loaded) { finish(); return; }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  window.setTimeout(finish, 6000);
+}
 
 // Navegadores con View Transitions entre páginas las manejan solos (ver CSS); el resto usa la cortina circular.
 const nativeTransitions = 'onpagereveal' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -112,13 +138,17 @@ consentBox?.addEventListener('change', () => { if (consentBox.checked) consentBo
 
 // Barra que se compacta y palabra de fondo con paralaje
 const navbar = document.querySelector('.navbar:not(.compact)');
+const heroVis = document.querySelector('.hero-visual');
 let ticking = false;
+const revealNow = () => document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => { if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('is-visible'); });
+revealNow();
 window.addEventListener('scroll', () => {
   if (ticking) return;
   ticking = true;
   requestAnimationFrame(() => {
-    document.documentElement.style.setProperty('--sy', window.scrollY);
+    if (heroVis && window.scrollY < 1400) heroVis.style.setProperty('--sy', window.scrollY);
     navbar?.classList.toggle('is-scrolled', window.scrollY > 24);
+    revealNow();
     ticking = false;
   });
 }, { passive: true });
@@ -132,4 +162,43 @@ if (heroStage && window.matchMedia('(hover: hover) and (pointer: fine)').matches
     heroStage.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
   });
   heroStage.addEventListener('pointerleave', () => { heroStage.style.setProperty('--px', 0); heroStage.style.setProperty('--py', 0); });
+}
+
+// Titular palabra por palabra (máscara que sube) y contadores del dashboard
+(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const title = document.querySelector('.hero h1, .auth-side h1');
+  if (title) {
+    title.setAttribute('aria-label', title.textContent.trim());
+    let n = 0;
+    const walk = (node) => [...node.childNodes].forEach((child) => {
+      if (child.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.append(document.createTextNode(' ')); return; }
+          const w = document.createElement('span'); w.className = 'w'; w.setAttribute('aria-hidden', 'true');
+          const i = document.createElement('i'); i.style.setProperty('--i', n++); i.textContent = part;
+          w.append(i); frag.append(w);
+        });
+        child.replaceWith(frag);
+      } else if (child.nodeType === 1) walk(child);
+    });
+    walk(title); title.classList.add('is-split');
+  }
+  document.querySelectorAll('.dash-stats strong').forEach((el, i) => {
+    const to = parseInt(el.textContent, 10); if (Number.isNaN(to)) return;
+    const start = performance.now() + 300 + i * 90; el.textContent = '0';
+    const tick = (t) => { const p = Math.min(Math.max((t - start) / 1000, 0), 1); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 4))); if (p < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  });
+})();
+
+// Brillo que sigue al cursor sobre las superficies de vidrio
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.querySelectorAll('.metrics, .feature-card, .step-list li').forEach((el) => el.addEventListener('pointermove', (e) => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    el.style.setProperty('--my', `${e.clientY - r.top}px`);
+  }));
 }

@@ -6,15 +6,17 @@
   <meta name="description" content="NOVA conecta talento con oportunidades laborales.">
   <title>NOVA | Oportunidades laborales</title>
   <link rel="stylesheet" href="./css/styles.css">
+  <script>try{if(!sessionStorage.getItem('novaSeen'))document.documentElement.classList.add('is-loading')}catch(e){}</script>
 </head>
 <body data-page="landing">
   <div class="page-loader" id="pageLoader" aria-hidden="true">
-    <div class="loader-orbit">
-      <img src="./assets/nova-icon.png" alt="" class="loader-icon">
-      <span class="loader-dot"></span>
+    <div class="loader-word"><span style="--i:0">N</span><span style="--i:1">O</span><span style="--i:2">V</span><span style="--i:3">A</span></div>
+    <div class="loader-core">
+      <div class="loader-orbit"><img src="./assets/nova-icon.png" alt="" class="loader-icon"><span class="loader-dot"></span></div>
+      <span class="loader-text">Preparando tu experiencia</span>
+      <div class="loader-progress"><span></span></div>
     </div>
-    <div class="loader-brand">NOVA</div>
-    <span class="loader-text">Preparando tu experiencia</span>
+    <span class="loader-count"><i id="loaderCount">0</i>%</span>
   </div>
 
   <div class="page-transition" id="pageTransition" aria-hidden="true">
@@ -41,17 +43,26 @@
   <main>
     <section class="hero" id="inicio">
       <div class="hero-copy reveal">
-        <h1>Tu próximo trabajo está a una postulación.</h1>
-        <p>Crea tu perfil, mira vacantes con requisitos claros y sigue cada postulación en un solo lugar. Si eres empresa, publica y revisa candidatos sin hojas de cálculo.</p>
+        <span class="eyebrow">Plataforma de oportunidades laborales</span>
+        <h1>Tu próximo <span class="gradient-text">gran paso</span> empieza aquí.</h1>
+        <p>
+          NOVA reúne candidatos y empresas en un mismo espacio para descubrir talento,
+          encontrar oportunidades y hacer más claro el proceso de selección.
+        </p>
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="./registro.html" data-transition>Crear mi cuenta</a>
           <a class="btn btn-outline" href="#funciones">Explorar NOVA</a>
         </div>
+
+        <div class="hero-points"><span>Perfiles profesionales</span><span>Vacantes organizadas</span><span>Seguimiento de postulaciones</span></div>
       </div>
 
       <div class="hero-visual" aria-label="Ejemplos de vacantes">
-        <i class="ring"></i><i class="star s1"></i><i class="star s2"></i>
+        <div class="glass-search"><div class="glass-search-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><div><span>Explora oportunidades</span><strong>Diseño, Tecnología, Marketing en Cali</strong></div></div>
+        <i class="ring"><b></b></i><i class="star s1"></i><i class="star s2"></i>
+        <div class="floating-card floating-card-top"><span class="status-dot"></span><div><strong>12 nuevas oportunidades</strong><small>publicadas hoy</small></div></div>
+        <div class="floating-card floating-card-bottom"><span class="spark-mini"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg></span><div><strong>Perfil destacado</strong><small>Tu talento puede ser visto</small></div></div>
         <article class="vac vac-1"><div class="vac-top"><span class="vac-logo">EN</span><span class="vac-tag">Nuevo</span></div><h3>Diseñador/a UX/UI</h3><p>Remoto, Cali</p><div class="vac-match"><span style="--w:92%"></span></div><div class="vac-foot"><small>92% compatible</small><strong>$3.2M</strong></div></article>
         <article class="vac vac-2"><div class="vac-top"><span class="vac-logo">BP</span><span class="vac-tag">Destacada</span></div><h3>Desarrollador/a Backend</h3><p>Híbrido, Cali</p><div class="vac-match"><span style="--w:87%"></span></div><div class="vac-foot"><small>87% compatible</small><strong>$4.5M</strong></div></article>
         <article class="vac vac-3"><div class="vac-top"><span class="vac-logo">DC</span><span class="vac-tag">Nuevo</span></div><h3>Analista de Marketing</h3><p>Presencial, Cali</p><div class="vac-match"><span style="--w:81%"></span></div><div class="vac-foot"><small>81% compatible</small><strong>$2.8M</strong></div></article>
@@ -66,8 +77,9 @@
 
     <section class="section" id="funciones">
       <div class="section-heading reveal">
-        <h2>Candidatos y empresas, en el mismo lugar.</h2>
-        <p>Perfil, vacantes y seguimiento de postulaciones en un solo lugar.</p>
+        <span class="eyebrow tone">Cómo funciona</span>
+        <h2>Una experiencia pensada para conectar.</h2>
+        <p>NOVA centraliza la información principal del proceso de búsqueda y selección, desde el perfil profesional hasta el seguimiento de cada postulación.</p>
       </div>
 
       <div class="feature-grid">
@@ -93,7 +105,7 @@
 
     <section class="section steps" id="proceso">
       <i class="star s1" aria-hidden="true"></i>
-      <div class="section-heading reveal"><h2>Así de simple.</h2><p>Cuatro pasos entre tu perfil y tu primera entrevista.</p></div>
+      <div class="section-heading reveal"><span class="eyebrow">Paso a paso</span><h2>Así de simple.</h2><p>Cuatro pasos entre tu perfil y tu primera entrevista.</p></div>
       <ol class="step-list">
         <li class="reveal"><span class="step-num">1</span><h3>Crea tu perfil</h3><p>Cuenta quién eres, tus habilidades y sube tu hoja de vida.</p></li>
         <li class="reveal"><span class="step-num">2</span><h3>Encuentra vacantes</h3><p>Filtra por área, modalidad y salario, con requisitos claros.</p></li>
@@ -104,7 +116,9 @@
 
     <section class="cta-section reveal">
       <div>
-        <h2>Crea tu cuenta en dos minutos.</h2>
+        <span class="eyebrow light">Da el siguiente paso</span>
+        <h2>Tu talento también merece un lugar.</h2>
+        <p>Únete a NOVA y empieza a descubrir nuevas oportunidades.</p>
       </div>
       <a class="btn btn-light" href="./registro.html" data-transition>Comenzar ahora</a>
     </section>
@@ -115,6 +129,8 @@
       <img src="./assets/nova-icon.png" alt="NOVA" class="footer-icon">
       <span>NOVA</span>
     </div>
+    <nav class="footer-links" aria-label="Enlaces"><a href="#inicio">Inicio</a><a href="#funciones">Cómo funciona</a><a href="./registro.html" data-transition>Crear cuenta</a><a href="./login.html" data-transition>Iniciar sesión</a></nav>
+    <small>© 2026 NOVA</small>
   </footer>
 
   <script src="./js/main.js"></script>
