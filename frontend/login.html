@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar sesión | NOVA</title>
   <link rel="stylesheet" href="./css/styles.css">
+  <script>try{if(!sessionStorage.getItem('novaSeen'))document.documentElement.classList.add('is-loading')}catch(e){}</script>
 </head>
 <body class="auth-page" data-page="login">
-  <div class="page-loader" id="pageLoader" aria-hidden="true">
-    <div class="loader-orbit"><img src="./assets/nova-icon.png" alt="" class="loader-icon"><span class="loader-dot"></span></div>
-    <div class="loader-brand">NOVA</div><span class="loader-text">Preparando tu experiencia</span>
+  <div class="page-loader nv" id="pageLoader" aria-hidden="true">
+    <div class="nv-word">
+      <span class="nv-n" style="--i:0">N</span><span class="nv-o" style="--i:1">O</span><span class="nv-v" style="--i:2">V</span><span class="nv-a" style="--i:3">A</span>
+      <svg class="nv-star" viewBox="0 0 24 24" aria-hidden="true">
+        <defs><linearGradient id="nvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb020"/><stop offset="1" stop-color="#ff7a59"/></linearGradient></defs>
+        <path d="M12 0C12.8 7 17 11.2 24 12 17 12.8 12.8 17 12 24 11.2 17 7 12.8 0 12 7 11.2 11.2 7 12 0Z" fill="url(#nvg)"/>
+      </svg>
+    </div>
   </div>
 
   <div class="page-transition" id="pageTransition" aria-hidden="true"><img src="./assets/nova-icon.png" alt="" class="transition-icon"></div>

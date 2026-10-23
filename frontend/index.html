@@ -9,14 +9,14 @@
   <script>try{if(!sessionStorage.getItem('novaSeen'))document.documentElement.classList.add('is-loading')}catch(e){}</script>
 </head>
 <body data-page="landing">
-  <div class="page-loader" id="pageLoader" aria-hidden="true">
-    <div class="loader-word"><span style="--i:0">N</span><span style="--i:1">O</span><span style="--i:2">V</span><span style="--i:3">A</span></div>
-    <div class="loader-core">
-      <div class="loader-orbit"><img src="./assets/nova-icon.png" alt="" class="loader-icon"><span class="loader-dot"></span></div>
-      <span class="loader-text">Preparando tu experiencia</span>
-      <div class="loader-progress"><span></span></div>
+  <div class="page-loader nv" id="pageLoader" aria-hidden="true">
+    <div class="nv-word">
+      <span class="nv-n" style="--i:0">N</span><span class="nv-o" style="--i:1">O</span><span class="nv-v" style="--i:2">V</span><span class="nv-a" style="--i:3">A</span>
+      <svg class="nv-star" viewBox="0 0 24 24" aria-hidden="true">
+        <defs><linearGradient id="nvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb020"/><stop offset="1" stop-color="#ff7a59"/></linearGradient></defs>
+        <path d="M12 0C12.8 7 17 11.2 24 12 17 12.8 12.8 17 12 24 11.2 17 7 12.8 0 12 7 11.2 11.2 7 12 0Z" fill="url(#nvg)"/>
+      </svg>
     </div>
-    <span class="loader-count"><i id="loaderCount">0</i>%</span>
   </div>
 
   <div class="page-transition" id="pageTransition" aria-hidden="true">
