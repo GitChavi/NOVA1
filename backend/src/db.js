@@ -1,4 +1,4 @@
-﻿const { Pool } = require('pg');
+const { Pool } = require('pg');
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -8,4 +8,8 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
 });
 
-module.exports = pool;
+module.exports = {
+  query: (text, params) => pool.query(text, params),
+  connect: () => pool.connect(),
+  close: () => pool.end(),
+};

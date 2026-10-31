@@ -1,54 +1,40 @@
-# NOVA — Avance 1
+# NOVA — Avance 2
 
-## Problema y objetivo
-
-NOVA propone un espacio web para conectar candidatos que buscan empleo con empresas que publican oportunidades. El objetivo de este avance es presentar la interfaz inicial y la base técnica del proyecto.
+NOVA conecta candidatos con empresas que publican oportunidades laborales.
 
 ## Alcance de este avance
 
-- Landing page y vistas maquetadas de inicio de sesión y registro.
-- Selección del tipo de cuenta: candidato o empresa.
-- Diseño adaptable a pantallas de escritorio y móviles.
-- Esquema relacional inicial para usuarios, perfiles, habilidades, vacantes, postulaciones y archivos.
-- Backend con Node.js y Express, conexión a PostgreSQL y endpoint `GET /health`.
+- Registro, inicio de sesion y cierre de sesion conectados a PostgreSQL.
+- Contraseñas cifradas con bcrypt y sesion JWT en cookie `HttpOnly`.
+- Dashboard privado con validacion de sesion al abrir y al volver a la pagina.
+- CRUD REST de vacantes consumido desde el dashboard. Las empresas administran sus propias vacantes; los candidatos consultan las activas.
+- Validaciones de entrada, permisos por rol/propiedad, feedback de carga y errores HTTP.
+- Endpoint `GET /health` para comprobar la conexion con PostgreSQL.
 
-Los formularios de inicio de sesión y registro validan los campos en el navegador; no crean cuentas ni autentican usuarios contra el backend en este avance.
+La subida de archivos no se implementa porque tiene ponderacion 0% en la rubrica actual. La tabla `archivos` permanece en el esquema para el desarrollo posterior.
 
-## Arquitectura
+## Endpoints
 
-El proyecto separa la interfaz estática en `frontend/` y el servidor/API en `backend/`. El endpoint `/health` ejecuta una consulta sencilla a PostgreSQL y devuelve el estado de la conexión.
+| Metodo y ruta | Acceso | Descripcion |
+|---|---|---|
+| `POST /api/auth/register` | Publico | Crea una cuenta de candidato o empresa e inicia sesion. |
+| `POST /api/auth/login` | Publico | Valida credenciales e inicia sesion. |
+| `POST /api/auth/logout` | Publico; limpia la cookie | Cierra la sesion del navegador. |
+| `GET /api/auth/me` | Sesion | Devuelve la cuenta autenticada. |
+| `GET /api/jobs` | Publico | Lista vacantes activas; acepta `q` para busqueda. |
+| `GET /api/jobs/:id` | Publico | Consulta una vacante activa. |
+| `GET /api/jobs/mine` | Empresa | Lista vacantes propias. |
+| `POST /api/jobs` | Empresa | Crea una vacante. |
+| `PUT /api/jobs/:id` | Empresa propietaria | Actualiza una vacante propia. |
+| `DELETE /api/jobs/:id` | Empresa propietaria | Elimina una vacante propia. |
 
-## Estructura
+## Ejecucion local en Windows
 
-```text
-NOVA/
-├── Diagrama ER/
-│   └── Empresa y Candidato-2026-09-28-183524.png
-├── frontend/
-│   ├── index.html
-│   ├── login.html
-│   ├── registro.html
-│   ├── dashboard.html
-│   ├── css/styles.css
-│   ├── js/main.js
-│   └── assets/
-├── backend/
-│   ├── src/
-│   │   ├── app.js
-│   │   ├── db.js
-│   │   └── routes/health.routes.js
-│   ├── sql/
-│   │   ├── 01_create_database.sql
-│   │   └── 02_schema.sql
-│   ├── package.json
-│   ├── .env.example
-│   └── .gitignore
-└── README.md
-```
+1. Instala Node.js LTS y PostgreSQL con pgAdmin.
+2. Crea `nova_db` con `backend/sql/01_create_database.sql` y ejecuta `backend/sql/02_schema.sql` sobre esa base.
+3. En `backend/`, copia `.env.example` como `.env`, configura las credenciales de PostgreSQL y cambia `JWT_SECRET` por un valor aleatorio de al menos 32 caracteres. No subas `.env` a Git.
+4. En PowerShell, desde `backend/`, ejecuta `npm.cmd install` y `npm.cmd start`.
+5. Abre `frontend/` con Live Server en `http://localhost:5500` o `http://127.0.0.1:5500`.
+6. Comprueba `http://localhost:3000/health`; debe responder con `status: ok` y `database: connected`.
 
-## Ejecución básica
-
-1. Crear `backend/.env` a partir de `backend/.env.example` y configurar las credenciales de PostgreSQL.
-2. Crear la base de datos y ejecutar el esquema SQL.
-3. Desde la carpeta `backend/`, ejecutar `npm install` y luego `npm start`.
-4. Consultar `http://localhost:3000/health`. Una respuesta `{"status":"ok","database":"connected"}` confirma la conexión.
+El esquema actual usa nombres en espanol (`usuarios`, `vacantes`, `perfiles_empresa`); el backend traduce estos nombres al formato JSON de la API. `FRONTEND_ORIGIN` permite configurar el origen de Live Server.
