@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi espacio | NOVA</title>
   <link rel="stylesheet" href="./css/styles.css">
-  <script>try{if(!sessionStorage.getItem('novaSession'))location.replace('./login.html')}catch(e){}</script>
   <script>try{if(!sessionStorage.getItem('novaSeen'))document.documentElement.classList.add('is-loading')}catch(e){}</script>
 </head>
 <body class="dashboard-page" data-page="dashboard">
@@ -47,135 +46,54 @@
       </div>
     </aside>
 
-    <main class="dash-main">
+        <main class="dash-main">
       <section class="dash-hero">
-        <div><h1>Hola, <span id="greetName">Usuario</span></h1><p>Tienes 1 entrevista por confirmar y 3 postulaciones activas.</p></div>
-        <div class="dash-stats"><div><strong>3</strong><span>Postulaciones</span></div><div><strong>1</strong><span>Entrevista</span></div><div><strong>8</strong><span>Guardadas</span></div></div>
+        <div><span class="eyebrow">Espacio NOVA</span><h1>Hola, <span id="greetName">Usuario</span></h1><p id="roleDescription">Consultando tu cuenta...</p></div>
       </section>
-
       <div class="dash-searchbar">
-        <span class="dash-search-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-        <input type="text" placeholder="Buscar vacantes, empresas o habilidades">
+        <span class="dash-search-icon" aria-hidden="true">⌕</span>
+        <input id="jobSearch" type="search" placeholder="Buscar vacantes por título, descripción o categoría" aria-label="Buscar vacantes">
+        <button class="btn btn-primary" id="searchJobs" type="button">Buscar</button>
       </div>
-
-      <div class="dash-categories">
-        <span class="dash-chip chip-yellow"><span class="dash-chip-dot"></span> Tecnología</span>
-        <span class="dash-chip chip-coral"><span class="dash-chip-dot"></span> Diseño</span>
-        <span class="dash-chip chip-sky"><span class="dash-chip-dot"></span> Marketing</span>
-        <span class="dash-chip chip-mint"><span class="dash-chip-dot"></span> Contabilidad</span>
-        <span class="dash-chip">Ver todas</span>
-      </div>
-
-      <div class="dash-section-row">
-        <h2>Búsquedas recientes</h2>
-        <a href="#">Ver todas</a>
-      </div>
-      <div class="dash-cards">
-        <article class="job-card">
-          <div class="job-card-banner bg-yellow"><span class="job-card-tag">Nuevo</span></div>
-          <div class="job-card-body">
-            <h3>Diseñador/a UX/UI</h3>
-            <div class="job-card-meta"><span>Remoto, Cali</span><strong>$3.2M</strong></div>
+      <section class="job-management" id="companyTools" hidden>
+        <div class="dash-section-row"><h2 id="jobFormHeading">Publicar una vacante</h2></div>
+        <form class="job-form" id="jobForm">
+          <input id="jobId" name="id" type="hidden">
+          <label class="field">Título<input name="title" required maxlength="180"></label>
+          <label class="field">Descripción<textarea name="description" required maxlength="12000" rows="4"></textarea></label>
+          <div class="job-form-grid">
+            <label class="field">Categoría<input name="category" maxlength="120"></label>
+            <label class="field">Ubicación<input name="location" maxlength="120"></label>
+            <label class="field">Modalidad<select name="modality"><option value="">Selecciona</option><option>Remoto</option><option>Híbrido</option><option>Presencial</option></select></label>
+            <label class="field">Tipo de contrato<input name="contract_type" maxlength="80"></label>
+            <label class="field">Experiencia mínima<input name="minimum_experience" maxlength="120"></label>
+            <label class="field">Jornada<input name="work_schedule" maxlength="80"></label>
+            <label class="field">Salario mínimo<input name="salary_min" type="number" min="0" step="0.01"></label>
+            <label class="field">Salario máximo<input name="salary_max" type="number" min="0" step="0.01"></label>
+            <label class="field">Número de vacantes<input name="openings" type="number" min="1" step="1" value="1" required></label>
+            <label class="field">Fecha de cierre<input name="closing_date" type="date"></label>
+            <label class="field">Estado<select name="status" required><option value="active">Activa</option><option value="draft">Borrador</option><option value="closed">Cerrada</option></select></label>
           </div>
-        </article>
-
-        <article class="job-card">
-          <div class="job-card-banner bg-sky"><span class="job-card-tag">Destacada</span></div>
-          <div class="job-card-body">
-            <h3>Desarrollador/a Backend</h3>
-            <div class="job-card-meta"><span>Híbrido, Cali</span><strong>$4.5M</strong></div>
-          </div>
-        </article>
-
-        <article class="job-card">
-          <div class="job-card-banner bg-coral"><span class="job-card-tag">Nuevo</span></div>
-          <div class="job-card-body">
-            <h3>Analista de Marketing</h3>
-            <div class="job-card-meta"><span>Presencial, Cali</span><strong>$2.8M</strong></div>
-          </div>
-        </article>
-      </div>
-
-      <div class="dash-section-row">
-        <h2>Vacantes populares</h2>
-        <a href="#">Ver todas</a>
-      </div>
-      <div class="dash-cards">
-        <article class="job-card">
-          <div class="job-card-banner bg-mint"><span class="job-card-tag">42 postulantes</span></div>
-          <div class="job-card-body">
-            <h3>Contador/a Senior</h3>
-            <div class="job-card-meta"><span>Remoto</span><strong>$3.6M</strong></div>
-          </div>
-        </article>
-
-        <article class="job-card">
-          <div class="job-card-banner bg-yellow"><span class="job-card-tag">28 postulantes</span></div>
-          <div class="job-card-body">
-            <h3>Product Manager</h3>
-            <div class="job-card-meta"><span>Híbrido, Cali</span><strong>$5.1M</strong></div>
-          </div>
-        </article>
-
-        <article class="job-card">
-          <div class="job-card-banner bg-sky"><span class="job-card-tag">17 postulantes</span></div>
-          <div class="job-card-body">
-            <h3>Ilustrador/a Digital</h3>
-            <div class="job-card-meta"><span>Remoto</span><strong>$2.5M</strong></div>
-          </div>
-        </article>
-      </div>
+          <p class="form-message" id="jobFormMessage" role="status" aria-live="polite"></p>
+          <div class="job-form-actions"><button class="btn btn-primary" id="saveJob" type="submit">Publicar vacante</button><button class="btn btn-outline" id="cancelEdit" type="button" hidden>Cancelar edición</button></div>
+        </form>
+      </section>
+      <section id="vacantes" aria-labelledby="jobsHeading">
+        <div class="dash-section-row"><h2 id="jobsHeading">Vacantes activas</h2><span id="jobsCount"></span></div>
+        <p class="form-message" id="jobsMessage" role="status" aria-live="polite">Cargando vacantes…</p>
+        <div class="dash-cards" id="jobsList"></div>
+      </section>
     </main>
 
-    <aside class="dash-right">
-      <div class="dash-profile">
-        <div class="dash-avatar" id="userInitial">U</div>
-        <div>
-          <strong id="userName">Usuario</strong>
-          <span>Vas muy bien, sigue así</span>
-        </div>
-      </div>
-
-      <h2>Postulación destacada</h2>
-      <div class="spotlight-card">
-        <span class="spotlight-tag">En revisión</span>
-        <h3>Diseñador/a UX/UI en Estudio Norte</h3>
-        <p>Postulaste hace 3 días, próxima entrevista pendiente de confirmar</p>
-      </div>
-
-      <h2>Mis postulaciones</h2>
-      <div class="application-list">
-        <div class="application-item">
-          <div class="application-avatar bg-yellow">EN</div>
-          <div class="application-info">
-            <strong>Estudio Norte</strong>
-            <span>Entrevista agendada</span>
-            <div class="application-progress"><span style="width:75%"></span></div>
-          </div>
-        </div>
-
-        <div class="application-item">
-          <div class="application-avatar bg-coral">BP</div>
-          <div class="application-info">
-            <strong>Banco Pacífico</strong>
-            <span>En revisión</span>
-            <div class="application-progress"><span style="width:45%"></span></div>
-          </div>
-        </div>
-
-        <div class="application-item">
-          <div class="application-avatar bg-sky">DC</div>
-          <div class="application-info">
-            <strong>Data Cali</strong>
-            <span>Postulación enviada</span>
-            <div class="application-progress"><span style="width:20%"></span></div>
-          </div>
-        </div>
-      </div>
+        <aside class="dash-right">
+      <div class="dash-profile"><div class="dash-avatar" id="userInitial">U</div><div><strong id="userName">Usuario</strong><span id="profileEmail"></span></div></div>
+      <h2>Tu cuenta</h2>
+      <div class="spotlight-card"><span class="spotlight-tag" id="accountType">Cuenta</span><p>La información de vacantes se carga desde la API de NOVA.</p></div>
     </aside>
 
   </div>
 
   <script src="./js/main.js"></script>
+  <script src="./js/api.js"></script>
 </body>
 </html>

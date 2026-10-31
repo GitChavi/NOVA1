@@ -10,12 +10,8 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 const transition = document.getElementById('pageTransition');
 const loader = document.getElementById('pageLoader');
 
-// Protege el panel: sin sesión no se muestra (también al volver con el botón "atrás")
-function guardDashboard() {
-  if (page === 'dashboard' && !ss.get('novaSession')) { window.location.replace('./login.html'); return true; }
-  return false;
-}
-guardDashboard();
+// La sesion del dashboard ahora se valida contra la API en api.js.
+function guardDashboard() { return false; }
 
 // Al volver con "atrás" el navegador restaura la página tal cual estaba (bfcache):
 // quitamos la cortina y los avisos que hubieran quedado abiertos.
@@ -108,63 +104,7 @@ roleButtons.forEach((button) => button.addEventListener('click', () => {
   if (roleInput) roleInput.value = button.dataset.role;
 }));
 
-// ===== Formularios =====
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-function showMessage(form, text, success = false) {
-  const message = form.querySelector('.form-message');
-  if (!message) return;
-  message.textContent = text;
-  message.classList.toggle('success', success);
-}
-function passwordValid(value) { return value.length >= 6 && /[A-Z]/.test(value) && /[0-9]/.test(value); }
-
-const loginForm = document.getElementById('loginForm');
-loginForm?.addEventListener('submit', (event) => {
-  event.preventDefault();
-  if (loginForm.dataset.busy) return;
-  if (!loginForm.reportValidity()) return;
-  const email = loginForm.elements.email.value.trim();
-  const password = loginForm.elements.password.value;
-  if (!emailPattern.test(email) || password.length < 6) return showMessage(loginForm, 'Revisa el correo y la contraseña.');
-  loginForm.dataset.busy = '1';
-  if (!ss.get('novaName')) ss.set('novaName', email.split('@')[0]);
-  ss.set('novaSession', '1');
-  document.getElementById('successOverlay')?.classList.add('is-active');
-  window.setTimeout(() => { window.location.replace('./dashboard.html'); }, 1200);
-});
-
-const registerForm = document.getElementById('registerForm');
-registerForm?.addEventListener('submit', (event) => {
-  event.preventDefault();
-  if (registerForm.dataset.busy) return;
-  const consent = registerForm.elements.consent;
-  if (consent && !consent.checked) {
-    consent.closest('.consent')?.classList.add('is-invalid');
-    return showMessage(registerForm, 'Acepta la política de tratamiento de datos para crear tu cuenta.');
-  }
-  if (!registerForm.reportValidity()) return;
-  const name = registerForm.elements.name.value.trim();
-  const email = registerForm.elements.email.value.trim();
-  const password = registerForm.elements.password.value;
-  if (name.length < 2 || !emailPattern.test(email) || !passwordValid(password)) return showMessage(registerForm, 'Revisa tus datos y los requisitos de contraseña.');
-  registerForm.dataset.busy = '1';
-  ss.set('novaName', name);
-  ss.set('novaConsent', new Date().toISOString());
-  document.getElementById('registerOverlay')?.classList.add('is-active');
-  window.setTimeout(() => { window.location.replace('./login.html'); }, 1200);
-});
-
-// ===== Panel =====
-const userName = document.getElementById('userName');
-if (userName) {
-  const name = ss.get('novaName') || 'Usuario';
-  userName.textContent = name;
-  const greet = document.getElementById('greetName');
-  if (greet) greet.textContent = name;
-  const initial = document.getElementById('userInitial');
-  if (initial) initial.textContent = name.charAt(0).toUpperCase();
-}
-document.querySelector('.dash-logout')?.addEventListener('click', () => { ss.del('novaSession'); ss.del('novaName'); });
+// Autenticacion y panel conectados a backend/js y api.js.
 
 // ===== Aparición al hacer scroll =====
 const revealElements = document.querySelectorAll('.reveal');

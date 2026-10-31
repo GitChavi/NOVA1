@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;500&family=Plus+Jakarta+Sans:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;500&family=Plus+Jakarta+Sans:wght@400..800&display=swap');
 @font-face { font-family: 'Agerlas'; src: url('../assets/fonts/Agerlas-DEMO.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
 
 :root {
@@ -545,3 +545,22 @@ html, body { overflow-y: auto; }
 .is-loading :is(.hero-copy, .hero-visual, .auth-side, .auth-card, .dash-hero, .dash-nav, .dash-cards, .application-list, .spotlight-card),
 .is-loading :is(.hero-copy, .hero-visual, .auth-side, .auth-card, .dash-hero, .dash-nav, .dash-cards, .application-list, .spotlight-card) * { animation-play-state: paused !important; }
 @media (prefers-reduced-motion: reduce) { .nv-word > span, .nv-star { animation: none; opacity: 1; transform: none; } .page-loader.is-exiting { transition-duration: .01ms; } }
+/* Avance 2: formularios y resultados de vacantes conectados a la API. */
+.dashboard-page:not(.is-authenticated) .dash-shell { visibility: hidden; }
+.dashboard-page.is-authenticated .dash-shell { visibility: visible; }
+.job-management { margin: 1.5rem 0; padding: 1.25rem; border: 1px solid var(--line, #dce2ec); border-radius: 1rem; background: var(--white, #fff); }
+.job-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+.job-form .field { display: grid; gap: .4rem; margin: .8rem 0; }
+.job-form input, .job-form select, .job-form textarea { width: 100%; padding: .75rem; border: 1px solid #cbd3df; border-radius: .55rem; font: inherit; }
+.job-form textarea { resize: vertical; }
+.job-form-actions, .job-card-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.job-card-body h3 { margin: .35rem 0; }
+.job-card-body p { overflow-wrap: anywhere; }
+.job-description { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
+.job-card-actions { padding: 0 1rem 1rem; }
+.job-card-actions .btn { font-size: .85rem; padding: .5rem .75rem; }
+.dash-searchbar { display: flex; gap: .6rem; }
+.dash-searchbar input { flex: 1; min-width: 0; }
+.form-message.success { color: #28744e; }
+.job-form button:disabled { opacity: .7; cursor: wait; }
+@media (max-width: 700px) { .job-form-grid { grid-template-columns: 1fr; } .dash-searchbar { flex-wrap: wrap; } .dash-searchbar input { flex-basis: 100%; } }
