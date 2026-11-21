@@ -2,19 +2,28 @@
   "name": "nova-backend",
   "version": "1.0.0",
   "private": true,
-  "description": "API REST de NOVA: autenticacion y CRUD de vacantes",
+  "description": "API REST de NOVA: autenticacion, vacantes, postulaciones y persistencia dual de archivos",
   "main": "src/app.js",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node src/app.js",
-    "dev": "node --watch src/app.js"
+    "dev": "node --watch src/app.js",
+    "db:setup": "node scripts/db-setup.js",
+    "db:migrate": "node scripts/db-setup.js --no-seed"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.119.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-rate-limit": "^8.7.5",
     "jsonwebtoken": "^9.0.2",
-    "pg": "^8.13.1"
+    "multer": "^2.5.0",
+    "pg": "^8.13.1",
+    "swagger-ui-express": "^5.0.1"
   }
 }
