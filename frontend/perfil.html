@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi perfil | NOVA</title>
   <link rel="stylesheet" href="./css/styles.css">
+  <script>try{if(!sessionStorage.getItem('novaSeen'))document.documentElement.classList.add('is-loading')}catch(e){}</script>
 </head>
 <body class="dashboard-page" data-page="perfil">
 
-  <div class="page-loader" id="pageLoader" aria-hidden="true">
-    <div class="loader-orbit"><img src="./assets/nova-icon.png" alt="" class="loader-icon"><span class="loader-dot"></span></div>
-    <div class="loader-brand">NOVA</div>
-    <span class="loader-text">Cargando tu perfil...</span>
+  <div class="page-loader nv" id="pageLoader" aria-hidden="true">
+    <div class="nv-word">
+      <span class="nv-n" style="--i:0">N</span><span class="nv-o" style="--i:1">O</span><span class="nv-v" style="--i:2">V</span><span class="nv-a" style="--i:3">A</span>
+      <svg class="nv-star" viewBox="0 0 24 24" aria-hidden="true">
+        <defs><linearGradient id="nvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb020"/><stop offset="1" stop-color="#ff7a59"/></linearGradient></defs>
+        <path d="M12 0C12.8 7 17 11.2 24 12 17 12.8 12.8 17 12 24 11.2 17 7 12.8 0 12 7 11.2 11.2 7 12 0Z" fill="url(#nvg)"/>
+      </svg>
+    </div>
   </div>
 
   <div class="dash-shell">
@@ -22,106 +27,91 @@
         <span>NOVA</span>
       </a>
 
-      <nav class="dash-nav">
-        <a href="./dashboard.html" data-transition><span class="dash-nav-icon">⌂</span> Resumen</a>
-        <a href="#"><span class="dash-nav-icon">◱</span> Vacantes</a>
-        <a href="#"><span class="dash-nav-icon">✎</span> Postulaciones</a>
-        <a href="#"><span class="dash-nav-icon">☆</span> Guardadas</a>
-        <a href="./perfil.html" class="active"><span class="dash-nav-icon">𖨆</span> Mi perfil</a>
-        <a href="#"><span class="dash-nav-icon">⚙</span> Configuración</a>
+      <nav class="dash-nav" aria-label="Panel">
+        <a href="./dashboard.html#inicio" data-transition><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span> Resumen</a>
+        <a href="./dashboard.html#vacantes" data-transition><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></span> Vacantes</a>
+        <a href="./dashboard.html#postulaciones" data-transition id="navApplications"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></svg></span> Postulaciones</a>
+        <a href="./perfil.html" class="active" aria-current="page"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span> Mi perfil</a>
       </nav>
 
       <div class="dash-sidebar-bottom">
-        <a class="dash-logout" href="./index.html" data-transition><span class="dash-nav-icon">⏻</span> Cerrar sesión</a>
+        <a class="dash-logout" href="./login.html"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></span> Cerrar sesión</a>
       </div>
     </aside>
 
     <main class="dash-main">
       <div class="dash-section-row">
         <div>
-          <span class="eyebrow">Información personal</span>
-          <h2>Editar perfil profesional</h2>
+          <span class="eyebrow tone">Información de la cuenta</span>
+          <h2 id="profileHeading">Mi perfil</h2>
         </div>
       </div>
 
-      <section class="auth-card auth-card-wide">
-        <div class="auth-header">
-          <span class="eyebrow">Perfil</span>
-          <h2>Datos del candidato</h2>
-          <p>Completa y actualiza tu información para que las empresas conozcan tu experiencia.</p>
-        </div>
+      <div class="profile-layout">
+        <!-- Foto (candidato) o logo (empresa): persistencia dual -->
+        <section class="profile-card" aria-labelledby="avatarHeading">
+          <h2 id="avatarHeading">Foto de perfil</h2>
+          <p id="avatarHint">PNG, JPG o WEBP de máximo 5 MB.</p>
+          <form class="upload-row" id="avatarForm" novalidate>
+            <div class="profile-avatar" id="avatarPreview">U</div>
+            <input class="file-input" type="file" name="archivo" id="avatarFile" accept="image/png,image/jpeg,image/webp" aria-label="Seleccionar imagen">
+            <button class="btn btn-primary" type="submit" id="avatarSubmit">Subir imagen</button>
+          </form>
+          <p class="form-message" id="avatarMessage" role="status" aria-live="polite"></p>
+        </section>
 
-        <form class="auth-form" id="profileForm">
-          <label for="nombre">Nombre completo</label>
-          <input id="nombre" name="nombre" type="text" placeholder="Tu nombre completo" required>
+        <!-- Hoja de vida (solo candidato) -->
+        <section class="profile-card" id="cvCard" aria-labelledby="cvHeading" hidden>
+          <h2 id="cvHeading">Hoja de vida</h2>
+          <p>Guárdala aquí para postularte con un clic. Solo la ven las empresas a cuyas vacantes te postules.</p>
+          <div class="upload-current" id="cvCurrent"></div>
+          <form class="upload-row" id="cvForm" novalidate>
+            <input class="file-input" type="file" name="archivo" id="cvFile" accept="application/pdf" aria-label="Seleccionar hoja de vida en PDF">
+            <button class="btn btn-primary" type="submit" id="cvSubmit">Guardar hoja de vida</button>
+          </form>
+          <p class="form-message" id="cvMessage" role="status" aria-live="polite"></p>
+        </section>
 
-          <label for="email">Correo electrónico</label>
-          <input id="email" name="email" type="email" placeholder="nombre@correo.com" required>
-
-          <label for="telefono">Teléfono de contacto</label>
-          <input id="telefono" name="telefono" type="tel" placeholder="+57 300 000 0000">
-
-          <label for="titulo_profesional">Título profesional</label>
-          <input id="titulo_profesional" name="titulo_profesional" type="text" placeholder="Ej: Desarrollador/a Frontend">
-
-          <label for="ubicacion">Ubicación</label>
-          <input id="ubicacion" name="ubicacion" type="text" placeholder="Ej: Cali, Colombia">
-
-          <label for="resumen">Resumen profesional / Biografía</label>
-          <textarea id="resumen" name="resumen" rows="4" placeholder="Cuéntale a las empresas sobre tu trayectoria, habilidades e intereses profesionales..."></textarea>
-
-          <button class="btn btn-primary btn-full" type="submit">Guardar perfil</button>
-          <p id="profileMessage" class="form-message" aria-live="polite"></p>
-        </form>
-      </section>
+        <section class="profile-card" aria-labelledby="dataHeading">
+          <h2 id="dataHeading">Datos</h2>
+          <p id="dataHint">Esta información la ven las empresas cuando te postulas.</p>
+          <form class="profile-form" id="profileForm" novalidate>
+            <div class="grid-2">
+              <label class="field">Nombre de contacto<input name="name" required minlength="2" maxlength="120" autocomplete="name"></label>
+              <label class="field">Correo electrónico<input name="email" type="email" disabled></label>
+              <label class="field">Teléfono<input name="phone" type="tel" maxlength="30" placeholder="+57 300 000 0000" autocomplete="tel"></label>
+              <!-- candidato -->
+              <label class="field" data-role="candidato">Título profesional<input name="title" maxlength="160" placeholder="Ej: Desarrollador/a Frontend"></label>
+              <label class="field" data-role="candidato">Ubicación<input name="location" maxlength="120" placeholder="Ej: Cali, Colombia"></label>
+              <!-- empresa -->
+              <label class="field" data-role="empresa">Nombre de la empresa<input name="company_name" maxlength="160"></label>
+              <label class="field" data-role="empresa">NIT<input name="nit" maxlength="60"></label>
+              <label class="field" data-role="empresa">Sector<input name="sector" maxlength="120" placeholder="Ej: Tecnología"></label>
+              <label class="field" data-role="empresa">Sitio web<input name="website" type="url" maxlength="200" placeholder="https://"></label>
+            </div>
+            <label class="field" data-role="candidato">Resumen profesional<textarea name="summary" rows="4" maxlength="3000" placeholder="Cuéntale a las empresas sobre tu trayectoria, habilidades e intereses"></textarea></label>
+            <label class="field" data-role="empresa">Descripción de la empresa<textarea name="description" rows="4" maxlength="3000"></textarea></label>
+            <button class="btn btn-primary" type="submit" id="profileSubmit">Guardar cambios</button>
+            <p class="form-message" id="profileMessage" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </div>
     </main>
 
     <aside class="dash-right">
       <div class="dash-profile">
-        <div class="dash-avatar" id="previewInitial">U</div>
-        <div>
-          <strong id="previewName">Tu Nombre</strong>
-          <span id="previewTitle">Tu Título</span>
-        </div>
+        <div class="dash-avatar" id="sideAvatar">U</div>
+        <div><strong id="sideName">Usuario</strong><span id="sideEmail"></span></div>
       </div>
-
-      <h2>Vista previa del perfil</h2>
-      <div class="spotlight-card">
-        <span class="spotlight-tag" id="previewLocation">Ubicación no definida</span>
-        <h3 id="previewHeader">Perfil Profesional</h3>
-        <p id="previewSummary">Tu resumen profesional aparecerá aquí...</p>
-      </div>
+      <h2>Mis archivos</h2>
+      <p class="form-message" id="filesMessage" role="status" aria-live="polite"></p>
+      <ul class="app-list" id="filesList"></ul>
     </aside>
 
   </div>
 
   <script src="./js/main.js"></script>
-  <script>
-    (function () {
-      var nameInput = document.getElementById('nombre');
-      var titleInput = document.getElementById('titulo_profesional');
-      var locationInput = document.getElementById('ubicacion');
-      var summaryInput = document.getElementById('resumen');
-
-      var prevName = document.getElementById('previewName');
-      var prevInitial = document.getElementById('previewInitial');
-      var prevTitle = document.getElementById('previewTitle');
-      var prevLocation = document.getElementById('previewLocation');
-      var prevSummary = document.getElementById('previewSummary');
-
-      function updatePreview() {
-        var nameVal = nameInput.value.trim() || 'Tu Nombre';
-        prevName.textContent = nameVal;
-        prevInitial.textContent = nameVal.charAt(0).toUpperCase();
-        prevTitle.textContent = titleInput.value.trim() || 'Tu Título';
-        prevLocation.textContent = locationInput.value.trim() || 'Ubicación no definida';
-        prevSummary.textContent = summaryInput.value.trim() || 'Tu resumen profesional aparecerá aquí...';
-      }
-
-      [nameInput, titleInput, locationInput, summaryInput].forEach(function (input) {
-        if (input) input.addEventListener('input', updatePreview);
-      });
-    })();
-  </script>
+  <script src="./js/api.js"></script>
+  <script src="./js/profile.js"></script>
 </body>
 </html>

@@ -27,37 +27,42 @@
         <span>NOVA</span>
       </a>
 
-      <nav class="dash-nav">
-        <a href="#" class="active"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span> Resumen</a>
-        <a href="#"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></span> Vacantes</a>
-        <a href="#"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></svg></span> Postulaciones</a>
-        <a href="#"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></span> Guardadas</a>
-        <a href="#"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span> Configuración</a>
+      <nav class="dash-nav" aria-label="Panel">
+        <a href="#inicio" class="active"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span> Resumen</a>
+        <a href="#vacantes"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></span> Vacantes</a>
+        <a href="#postulaciones" id="navApplications"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></svg></span> <span id="navApplicationsLabel">Postulaciones</span></a>
+        <a href="./perfil.html" data-transition><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span> Mi perfil</a>
       </nav>
 
       <div class="dash-sidebar-bottom">
-        <a class="dash-logout" href="./index.html" data-transition><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></span> Cerrar sesión</a>
+        <a class="dash-logout" href="./login.html"><span class="dash-nav-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></span> Cerrar sesión</a>
 
         <div class="dash-promo">
           <span class="dash-promo-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></span>
-          <strong>Completa tu perfil para recibir mejores oportunidades</strong>
-          <a class="btn btn-primary btn-full" href="#">Completar perfil</a>
+          <strong id="promoText">Completa tu perfil para recibir mejores oportunidades</strong>
+          <a class="btn btn-primary btn-full" href="./perfil.html" data-transition>Completar perfil</a>
         </div>
       </div>
     </aside>
 
-        <main class="dash-main">
+    <main class="dash-main" id="inicio">
       <section class="dash-hero">
         <div><span class="eyebrow">Espacio NOVA</span><h1>Hola, <span id="greetName">Usuario</span></h1><p id="roleDescription">Consultando tu cuenta...</p></div>
+        <div class="dash-stats" aria-live="polite">
+          <div><strong id="statOne" data-live>0</strong><span id="statOneLabel">Vacantes</span></div>
+          <div><strong id="statTwo" data-live>0</strong><span id="statTwoLabel">Postulaciones</span></div>
+        </div>
       </section>
+
       <div class="dash-searchbar">
         <span class="dash-search-icon" aria-hidden="true">⌕</span>
         <input id="jobSearch" type="search" placeholder="Buscar vacantes por título, descripción o categoría" aria-label="Buscar vacantes">
         <button class="btn btn-primary" id="searchJobs" type="button">Buscar</button>
       </div>
+
       <section class="job-management" id="companyTools" hidden>
         <div class="dash-section-row"><h2 id="jobFormHeading">Publicar una vacante</h2></div>
-        <form class="job-form" id="jobForm">
+        <form class="job-form" id="jobForm" novalidate>
           <input id="jobId" name="id" type="hidden">
           <label class="field">Título<input name="title" required maxlength="180"></label>
           <label class="field">Descripción<textarea name="description" required maxlength="12000" rows="4"></textarea></label>
@@ -78,22 +83,68 @@
           <div class="job-form-actions"><button class="btn btn-primary" id="saveJob" type="submit">Publicar vacante</button><button class="btn btn-outline" id="cancelEdit" type="button" hidden>Cancelar edición</button></div>
         </form>
       </section>
+
       <section id="vacantes" aria-labelledby="jobsHeading">
         <div class="dash-section-row"><h2 id="jobsHeading">Vacantes activas</h2><span id="jobsCount"></span></div>
         <p class="form-message" id="jobsMessage" role="status" aria-live="polite">Cargando vacantes…</p>
         <div class="dash-cards" id="jobsList"></div>
       </section>
+
+      <!-- Candidato: historial de postulaciones -->
+      <section id="postulaciones" class="panel-section" aria-labelledby="applicationsHeading" hidden>
+        <div class="dash-section-row"><h2 id="applicationsHeading">Mis postulaciones</h2><span id="applicationsCount"></span></div>
+        <p class="form-message" id="applicationsMessage" role="status" aria-live="polite"></p>
+        <ul class="app-list" id="applicationsList"></ul>
+      </section>
+
+      <!-- Empresa: postulantes de la vacante elegida -->
+      <section id="postulantes" class="panel-section" aria-labelledby="applicantsHeading" hidden>
+        <div class="dash-section-row"><h2 id="applicantsHeading">Postulantes</h2><button class="text-button" id="closeApplicants" type="button">Cerrar</button></div>
+        <p class="form-message" id="applicantsMessage" role="status" aria-live="polite"></p>
+        <ul class="app-list" id="applicantsList"></ul>
+      </section>
     </main>
 
-        <aside class="dash-right">
-      <div class="dash-profile"><div class="dash-avatar" id="userInitial">U</div><div><strong id="userName">Usuario</strong><span id="profileEmail"></span></div></div>
+    <aside class="dash-right">
+      <div class="dash-profile">
+        <div class="dash-avatar" id="userInitial">U</div>
+        <div><strong id="userName">Usuario</strong><span id="profileEmail"></span></div>
+      </div>
       <h2>Tu cuenta</h2>
-      <div class="spotlight-card"><span class="spotlight-tag" id="accountType">Cuenta</span><p>La información de vacantes se carga desde la API de NOVA.</p></div>
+      <div class="spotlight-card">
+        <span class="spotlight-tag" id="accountType">Cuenta</span>
+        <p id="accountHint">La información se carga desde la API de NOVA.</p>
+      </div>
+      <div class="file-status" id="fileStatus" hidden>
+        <h2 id="fileStatusTitle">Tu hoja de vida</h2>
+        <p id="fileStatusText"></p>
+        <a class="btn btn-ghost" href="./perfil.html" data-transition id="fileStatusLink">Gestionar en mi perfil</a>
+      </div>
     </aside>
 
   </div>
 
+  <dialog class="policy-dialog apply-dialog" id="applyDialog" aria-labelledby="applyTitle">
+    <form id="applyForm" novalidate>
+      <div class="policy-head"><h3 id="applyTitle">Postularme</h3><button class="policy-close" type="button" data-close aria-label="Cerrar">&times;</button></div>
+      <div class="policy-body">
+        <p class="apply-job" id="applyJob"></p>
+        <input type="hidden" name="job_id">
+        <fieldset class="cv-choice" id="cvChoice">
+          <legend>Hoja de vida (PDF, máximo 5 MB)</legend>
+          <label class="radio-row" id="savedCvOption" hidden><input type="radio" name="cv_source" value="saved"> <span>Usar la guardada en mi perfil: <strong id="savedCvName"></strong></span></label>
+          <label class="radio-row"><input type="radio" name="cv_source" value="upload" checked> <span>Subir un archivo nuevo</span></label>
+          <input class="file-input" type="file" name="archivo" id="applyFile" accept="application/pdf">
+        </fieldset>
+        <label class="field">Mensaje para la empresa (opcional)<textarea name="message" rows="4" maxlength="2000" placeholder="Cuéntale a la empresa por qué te interesa la vacante"></textarea></label>
+        <p class="form-message" id="applyMessage" role="status" aria-live="polite"></p>
+      </div>
+      <div class="policy-foot"><button class="btn btn-outline" type="button" data-close>Cancelar</button><button class="btn btn-primary" type="submit" id="applySubmit">Enviar postulación</button></div>
+    </form>
+  </dialog>
+
   <script src="./js/main.js"></script>
   <script src="./js/api.js"></script>
+  <script src="./js/dashboard.js"></script>
 </body>
 </html>
