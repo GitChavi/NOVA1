@@ -177,7 +177,8 @@ if (heroStage && window.matchMedia('(hover: hover) and (pointer: fine)').matches
     });
     walk(title); title.classList.add('is-split');
   }
-  document.querySelectorAll('.dash-stats strong').forEach((el, i) => {
+  // Solo contadores estaticos: los que llena la API (data-live) no se animan para no sobrescribirlos.
+  document.querySelectorAll('.dash-stats strong:not([data-live])').forEach((el, i) => {
     const to = parseInt(el.textContent, 10); if (Number.isNaN(to)) return;
     const start = performance.now() + 300 + i * 90; el.textContent = '0';
     const tick = (t) => { const p = Math.min(Math.max((t - start) / 1000, 0), 1); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 4))); if (p < 1) requestAnimationFrame(tick); };
