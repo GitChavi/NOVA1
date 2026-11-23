@@ -6,7 +6,10 @@ const columns = `v.id, v.empresa_id AS company_id, v.titulo AS title, v.descripc
   v.experiencia_minima AS minimum_experience, v.tipo_contrato AS contract_type,
   v.jornada AS work_schedule, v.numero_vacantes AS openings, v.fecha_cierre AS closing_date,
   CASE v.estado WHEN 'activa' THEN 'active' WHEN 'cerrada' THEN 'closed' ELSE 'draft' END AS status,
-  v.creado_en AS created_at, pe.nombre_empresa AS company_name`;
+  v.creado_en AS created_at, pe.nombre_empresa AS company_name,
+  (SELECT '/api/files/' || a.id || '/download' FROM archivos a
+    WHERE a.usuario_id = v.empresa_id AND a.tipo = 'logo' AND a.entidad = 'usuario'
+    ORDER BY a.subido_en DESC LIMIT 1) AS company_logo_url`;
 
 function cleanText(value, maxLength) {
   if (typeof value !== 'string' || !value.trim()) return null;
@@ -72,7 +75,7 @@ async function listActive(req, res) {
     const result = await db.query(
       `SELECT ${columns} FROM vacantes v
        JOIN perfiles_empresa pe ON pe.usuario_id = v.empresa_id
-       WHERE v.estado = 'activa'
+       WHERE v.estado = 'activa' AND (v.fecha_cierre IS NULL OR v.fecha_cierre >= CURRENT_DATE)
          AND ($1 = '' OR v.titulo ILIKE $2 OR v.descripcion ILIKE $2 OR v.categoria ILIKE $2)
        ORDER BY v.creado_en DESC`,
       [q, `%${q}%`]
@@ -88,7 +91,9 @@ async function listMine(req, res) {
   try {
     const q = String(req.query.q || '').trim();
     const result = await db.query(
-      `SELECT ${columns} FROM vacantes v
+      `SELECT ${columns},
+         (SELECT count(*) FROM postulaciones p WHERE p.vacante_id = v.id)::int AS applications_count
+       FROM vacantes v
        JOIN perfiles_empresa pe ON pe.usuario_id = v.empresa_id
        WHERE v.empresa_id = $1
          AND ($2 = '' OR v.titulo ILIKE $3 OR v.descripcion ILIKE $3 OR v.categoria ILIKE $3)
@@ -108,7 +113,7 @@ async function getOne(req, res) {
     const result = await db.query(
       `SELECT ${columns} FROM vacantes v
        JOIN perfiles_empresa pe ON pe.usuario_id = v.empresa_id
-       WHERE v.id = $1 AND v.estado = 'activa'`,
+       WHERE v.id = $1 AND v.estado = 'activa' AND (v.fecha_cierre IS NULL OR v.fecha_cierre >= CURRENT_DATE)`,
       [req.params.id]
     );
     if (!result.rows[0]) return res.status(404).json({ error: 'No se encontro la vacante.' });
