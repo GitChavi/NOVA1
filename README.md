@@ -2,17 +2,19 @@
 
 NOVA conecta candidatos con empresas. Las empresas publican vacantes y revisan a sus postulantes; los candidatos se postulan adjuntando su hoja de vida y siguen el estado de cada postulación.
 
-**URL en producción:** _pendiente: pegar aquí la URL de Render_
+**Ejecución:** local, con datos de demostración (ver [Ejecución local](#ejecución-local-windows)). La aplicación queda lista para desplegarse en Render (ver [Despliegue](#despliegue-render--supabase)).
 **Documentación de la API:** `/docs` (Swagger UI) · `/docs.json` (OpenAPI 3)
 
 ## Equipo
 
-| Integrante | Rol principal |
+| Integrante | Rama |
 |---|---|
-| _Nombre 1_ | _por completar_ |
-| _Nombre 2_ | _por completar_ |
-| _Nombre 3_ | _por completar_ |
-| _Nombre 4_ | _por completar_ |
+| Katherin Vanessa Cardona Salamanca | `Katherin` |
+| Harold Alexander Arce Casanova | `Harold` |
+| Javier Lain Valero | `Javier` |
+| Ana María Trochez Torres | `Ana` |
+
+Cada integrante trabajó en su propia rama y otro integrante revisó su Pull Request antes de integrarlo a `main`.
 
 ## Flujo completo
 
